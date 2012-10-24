@@ -47,7 +47,10 @@ public class WeakList<E> implements Iterable<E>
 		if (head == null) {
 			head = tail = new Node(item);
 		} else {
-			tail = tail.next = new Node(item);
+			// tail = tail.next = new Node(item);
+			Node node = new Node(item);
+			node.next = head;
+			head = node;
 		}
 		count++;
 	}
@@ -157,9 +160,9 @@ public class WeakList<E> implements Iterable<E>
 		Integer[] ints = {new Integer(1), new Integer(2), new Integer(3)};
 		add(list, ints);
 		iterate(list);
-		remove(list, 3);
-		remove(list, 2);
-		// remove(list, 1);
+		// remove(list, 3);
+		// remove(list, 2);
+		remove(list, 1);
 
         // Create some garbage
         for (int i = 0; i < 1_000_000; i++) {
