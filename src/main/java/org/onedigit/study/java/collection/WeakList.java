@@ -1,7 +1,7 @@
 package org.onedigit.study.java.collection;
 
-import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -10,24 +10,31 @@ public class WeakList<E> implements Iterable<E>
 	private ReferenceQueue<E> queue = new ReferenceQueue<>();
 	private Random rand = new Random();
 	
-	private class Node extends PhantomReference<E>
+	private class Node extends WeakReference<E>
 	{
-		private E item;
-		private Node next;
-		private final int id;
+		private Node next = null;
+		private final String id;
 		
 		public Node(E item)
 		{
 			super(item, queue);
-			this.item = item;
-			this.id = rand.nextInt();
+			this.id = String.valueOf(item);
+			this.next = null;
 		}
 		
 		public void clear()
 		{
-			this.item = null;
+		    // this.enqueue();
+		    E item = get();
+		    item = null;
 			this.next = null;
 		}
+		
+		public E getItem()
+		{
+		    return get();
+		}
+	
 		
 		@Override
 		public String toString() 
@@ -39,14 +46,17 @@ public class WeakList<E> implements Iterable<E>
 	}
 	
 	private Node head = null;
-	private Node tail = null;
+	// private Node tail = null;
 	private int count = 0;
 	
 	public void add(E item)
 	{
 		if (head == null) {
-			head = tail = new Node(item);
+		    System.out.println("Adding to head");
+		    // head = tail = new Node(item);
+		    head = new Node(item);
 		} else {
+		    System.out.println("Appending to head");
 			// tail = tail.next = new Node(item);
 			Node node = new Node(item);
 			node.next = head;
@@ -57,25 +67,32 @@ public class WeakList<E> implements Iterable<E>
 	
 	public void remove(E item)
 	{
-		// checkExpired();
-		if (head.item.equals(item)) {
-			System.out.println("Removing from head...");
-			Node tmp = head.next;
+	    if (head.getItem().equals(item)) {
+			System.out.println("Removing from head... " + head.getItem());
+	        /*
+			Node tmp = null;
+			if (head.next != null) {
+			    System.out.println("Head next is not null");
+			    tmp = head.next;
+			}
 			head.clear();
-			head = null;
-			head = tmp;
+			// head = null;
+			// head = tmp;
+	        */
 			count--;
 		} else {
-			System.out.println("Removing from middle...");
 			Node current = head;
 			Node next = head.next;
 			while (next != null) {
-				if (next.item.equals(item)) {
-					current.next = next.next;
+				if (next.getItem().equals(item)) {
+		            System.out.println("Removing from middle... " + item);
+		            // current.next = next.next;
+		            /*
 					next.clear();
 					next = null;
 					count--;
 					break;
+					*/
 				}
 				current = next;
 				next = next.next;
@@ -87,16 +104,7 @@ public class WeakList<E> implements Iterable<E>
 	{
 		return count;
 	}
-	
-	private void checkExpired()
-	{
-		Object ref = null;
-		while ( (ref = queue.poll()) != null) {
-			System.out.println("Reference Queue entries:");
-			System.out.println("\t" + ref);
-		}
-	}
-		
+			
 	public Iterator<E> iterator()
 	{
 		return new WeakListIterator();
@@ -116,7 +124,7 @@ public class WeakList<E> implements Iterable<E>
 		@Override
         public E next()
         {
-	        E item = current.item;
+	        E item = current.getItem();
 	        prev = current;
 	        current = current.next;
 	        return item;
@@ -125,7 +133,7 @@ public class WeakList<E> implements Iterable<E>
 		@Override
         public void remove()
         {
-			WeakList.this.remove(prev.item);
+			WeakList.this.remove(prev.getItem());
         }
 	}
 	
@@ -148,28 +156,58 @@ public class WeakList<E> implements Iterable<E>
 	
 	public static <E> void add(WeakList<E> list, E... items)
 	{
-		for (E item : items) {
-			list.add(item);
-		}
+	    for (E item : items) {
+	        list.add(item);
+	    }
+	}
+	
+	private void checkExpired()
+	{
+	    Object ref = null;
+	    while (true) {
+	        createGarbage();
+	        // System.out.println("Creating garbage...");
+	        while ( (ref = queue.poll()) != null) {
+	            System.out.println("Reference Queue entries:");
+	            System.out.println("\t" + ref);
+	        }
+	        // System.out.println("Sleeping...");
+	        try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+	    }
+	}
+
+	public static void createGarbage()
+	{
+        for (int i = 0; i < 1_000_000; i++) {
+            String s = new String(i + "");
+        }
+        /*
+        for (int i = 0; i < 100; i++) {
+            System.gc();
+        }
+        */
 	}
 	
 	public static void main(String... args)
 	{
 		WeakList<Integer> list = new WeakList<>();
-
-		Integer[] ints = {new Integer(1), new Integer(2), new Integer(3)};
-		add(list, ints);
+		Integer one = new Integer(1);
+		Integer two = new Integer(2);
+        // Integer[] ints = {one};
+        // add(list, ints);
+		list.add(one);
+		list.add(two);
 		iterate(list);
-		// remove(list, 3);
-		// remove(list, 2);
-		remove(list, 1);
-
-        // Create some garbage
-        for (int i = 0; i < 1_000_000; i++) {
-        	String s = new String(i + "");
-        }
-        
+		one = null;
+		two = null;
+		// list.remove(1);
+		// list.remove(2);
+		// list.remove(3);
         list.checkExpired();
         System.out.println("Count = " + list.size());
+        iterate(list);
 	}
 }
