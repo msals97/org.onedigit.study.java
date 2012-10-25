@@ -1,4 +1,4 @@
-package org.onedigit.study.java.collection.cas;
+package org.onedigit.study.java.collection.concurrent.cas;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
