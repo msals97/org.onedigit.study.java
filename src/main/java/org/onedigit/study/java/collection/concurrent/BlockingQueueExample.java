@@ -9,6 +9,9 @@ import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockingQueueExample
 {
@@ -35,8 +38,40 @@ public class BlockingQueueExample
 	LinkedBlockingDeque<Integer> ldQ;
 	LinkedTransferQueue<Integer> ltQ;
 	
-	public BlockingQueueExample()
+	public void arrayBlockingQueue() throws InterruptedException
 	{
 		aQ = new ArrayBlockingQueue<>(10);
+		aQ.put(1);
+		aQ.put(2);
+		aQ.put(3);
+		aQ.put(4);
+		Integer i = aQ.poll();
+		System.out.println(i);
+		i = aQ.poll();
+		System.out.println(i);		
+	}
+	
+	public void delayQueue()
+	{
+		dQ = new DelayQueue<DelayItem>();
+		Lock lock = new ReentrantLock();
+		Condition condition = lock.newCondition();
+		try {
+			lock.lock();
+			condition.signalAll();
+		} finally {
+			lock.unlock();
+		}
+	}
+	
+	public BlockingQueueExample() 
+	{
+
+	}
+	
+	public static void main(String... args) throws InterruptedException
+	{
+		BlockingQueueExample example = new BlockingQueueExample();
+		example.delayQueue();
 	}
 }
