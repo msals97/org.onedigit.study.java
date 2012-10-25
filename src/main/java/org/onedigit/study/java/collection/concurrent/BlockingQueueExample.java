@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockingQueueExample
 {
-	class DelayItem implements Delayed
+	class WorkItem implements Delayed
 	{
 		@Override
         public int compareTo(Delayed o)
@@ -31,7 +31,7 @@ public class BlockingQueueExample
 	}
 	
 	ArrayBlockingQueue<Integer> aQ;
-	DelayQueue<DelayItem> dQ;
+	DelayQueue<WorkItem> dQ;
 	LinkedBlockingQueue<Integer> lQ;
 	PriorityBlockingQueue<Integer> pQ;
 	SynchronousQueue<Integer> sQ;
@@ -53,7 +53,7 @@ public class BlockingQueueExample
 	
 	public void delayQueue()
 	{
-		dQ = new DelayQueue<DelayItem>();
+		dQ = new DelayQueue<WorkItem>();
 		Lock lock = new ReentrantLock();
 		Condition condition = lock.newCondition();
 		try {
