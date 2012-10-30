@@ -1,6 +1,7 @@
 package org.onedigit.study.java.collection.concurrent;
 
 import java.util.Date;
+import java.util.PriorityQueue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
@@ -47,25 +48,46 @@ public class BlockingQueueExample
 		public String toString() { return String.valueOf(delay); } 
 	}
 	
-	ArrayBlockingQueue<Integer> aQ;
+	ArrayBlockingQueue<Integer> aBQ;
 	DelayQueue<WorkItem> dQ;
 	LinkedBlockingQueue<Integer> lQ;
-	PriorityBlockingQueue<Integer> pQ;
+	PriorityBlockingQueue<Integer> pBQ;
 	SynchronousQueue<Integer> sQ;
-	LinkedBlockingDeque<Integer> ldQ;
-	LinkedTransferQueue<Integer> ltQ;
+	LinkedBlockingDeque<Integer> lBQ;
+	LinkedTransferQueue<Integer> lTQ;
+	
+	PriorityQueue<Integer> pQ;
 	
 	public void arrayBlockingQueue() throws InterruptedException
 	{
-		aQ = new ArrayBlockingQueue<>(10);
-		aQ.put(1);
-		aQ.put(2);
-		aQ.put(3);
-		aQ.put(4);
-		Integer i = aQ.poll();
+		System.out.println("--ArrayBlockingQueue--");
+		aBQ = new ArrayBlockingQueue<>(5);
+		aBQ.put(1);
+		aBQ.put(2);
+		aBQ.put(3);
+		aBQ.put(4);
+		
+		// same as offer, but will throw exceptions. Note that
+		// ArrayBlockingQueue allows duplicates.
+		aBQ.add(4); 
+		
+		// This should fail, as we will exceed Queue length
+		boolean success = aBQ.offer(6); 
+		assert(false == success);
+		
+		System.out.println(aBQ);
+		
+		aBQ.take();
+		
+		Integer i = aBQ.poll();
 		System.out.println(i);
-		i = aQ.poll();
-		System.out.println(i);		
+		i = aBQ.poll();
+		System.out.println(i);	
+		
+		aBQ.peek();
+		// same as peek except that this will throw an exception
+		// if Queue is empty
+		aBQ.element(); 
 	}
 	
 	private void sleep(long n)
@@ -79,9 +101,10 @@ public class BlockingQueueExample
 	
 	public void delayQueue() 
 	{
+		System.out.println("--DelayQueue--");
 		WorkItem workItem_1 = new WorkItem(5000);
 		WorkItem workItem_2 = new WorkItem(1000);
-		WorkItem workItem_3 = new WorkItem(10000);
+		WorkItem workItem_3 = new WorkItem(7000);
 		WorkItem workItem_4 = new WorkItem(3000);
 		WorkItem workItem_5 = new WorkItem(4000);
 
@@ -120,6 +143,7 @@ public class BlockingQueueExample
 	public static void main(String... args) throws InterruptedException
 	{
 		BlockingQueueExample example = new BlockingQueueExample();
-		example.delayQueue();
+		example.arrayBlockingQueue();
+		// example.delayQueue();
 	}
 }
