@@ -1,5 +1,6 @@
 package org.onedigit.study.java.collection.concurrent;
 
+import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
@@ -17,17 +18,33 @@ public class BlockingQueueExample
 {
 	class WorkItem implements Delayed
 	{
+		private TimeUnit expireUnit = TimeUnit.NANOSECONDS;
+		private TimeUnit delayUnit = TimeUnit.MILLISECONDS;
+		private long expire;
+		private long delay;
+		
+		public WorkItem(long delay)
+		{
+			this.delay = delay;
+			long delayNano = expireUnit.convert(delay, delayUnit);
+			this.expire = System.nanoTime() + delayNano;
+		}
+		
 		@Override
-        public int compareTo(Delayed o)
+        public int compareTo(Delayed other)
         {
-	        return 0;
+	        return Long.valueOf(this.expire).compareTo(((WorkItem)other).expire);
         }
 
 		@Override
         public long getDelay(TimeUnit unit)
         {
-	        return 0;
+			long current = System.nanoTime();
+	        return unit.convert(expire - current, expireUnit);
         }
+		
+		@Override 
+		public String toString() { return String.valueOf(delay); } 
 	}
 	
 	ArrayBlockingQueue<Integer> aQ;
@@ -51,9 +68,40 @@ public class BlockingQueueExample
 		System.out.println(i);		
 	}
 	
-	public void delayQueue()
+	private void sleep(long n)
 	{
+		try {
+	        Thread.sleep(n);
+        } catch (InterruptedException e) {
+	        e.printStackTrace();
+        }
+	}
+	
+	public void delayQueue() 
+	{
+		WorkItem workItem_1 = new WorkItem(5000);
+		WorkItem workItem_2 = new WorkItem(1000);
+		WorkItem workItem_3 = new WorkItem(10000);
+		WorkItem workItem_4 = new WorkItem(3000);
+		WorkItem workItem_5 = new WorkItem(4000);
+
 		dQ = new DelayQueue<WorkItem>();
+		dQ.add(workItem_1);
+		dQ.add(workItem_2);
+		dQ.add(workItem_3);
+		dQ.add(workItem_4);
+		dQ.add(workItem_5);
+		
+		System.out.println(new Date(System.currentTimeMillis()));
+		try {
+			do {
+				WorkItem item = dQ.take();
+				System.out.println(new Date(System.currentTimeMillis()) + ": " + item);
+			} while (dQ.peek() != null);
+        } catch (InterruptedException e) {
+	        e.printStackTrace();
+        }
+		
 		Lock lock = new ReentrantLock();
 		Condition condition = lock.newCondition();
 		try {
