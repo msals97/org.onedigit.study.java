@@ -50,28 +50,32 @@ public class SingleList<E>
 	public boolean remove(E value)
 	{
 		boolean result = false;
+		
 		if (head == null) {
 			return result;
 		}
-		
-		if (head.value.equals(value)) {
-			head = head.next;
-			result = true;
-		} else {
-			Node current = head;
-			Node next = head.next;
-			while (current != null && next != null) {
-				if (next.value.equals(value)) {
-					current.next = next.next;
-					result = true;
-					break;
-				} else {
-					current = next;
-					next = current.next;
+		Node prev = null;
+		Node current = head;
+		Node next = current.next;
+		while (current != null) {
+			if (current.value.equals(value)) {
+				current.next = null;
+				if (prev != null) {
+					prev.next = next;
 				}
+				if (current == head) {
+					head = next;
+				}
+				if (current == tail) {
+					tail = next;
+				}
+				result = true;
+				break;
 			}
+			prev = current;
+			current = next;
+			next = current.next;
 		}
-		
 		return result;
 	}
 	
@@ -112,6 +116,8 @@ public class SingleList<E>
 		assert(ret == true);
 		ret = sList.remove(10);
 		assert(ret == false);
+		System.out.println(sList);
+		sList.reverse();
 		System.out.println(sList);
 	}
 }
