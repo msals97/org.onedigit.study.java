@@ -27,5 +27,12 @@ public class JavaPrimitives
 		int longSize = Long.SIZE;
 		System.out.println("longSize = " + longSize + ", longMax = " + 
 				longMax + " longMin = " + longMin);
+		
+		System.out.println(Long.toBinaryString(1L << 63));
+		System.out.println(Long.toBinaryString( (1L << 63) - 1));
+		long l1 = 0b10000000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
+		long l2 = 0b01111111_11111111_11111111_11111111_11111111_11111111_11111111_11111111L;
+		System.out.println(l1);
+		System.out.println(l2);
 	}
 }

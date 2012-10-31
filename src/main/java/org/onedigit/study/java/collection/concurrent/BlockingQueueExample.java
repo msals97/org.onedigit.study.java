@@ -1,6 +1,9 @@
 package org.onedigit.study.java.collection.concurrent;
 
+import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.DelayQueue;
@@ -14,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import sun.nio.cs.ArrayDecoder;
 
 public class BlockingQueueExample
 {
@@ -48,20 +53,29 @@ public class BlockingQueueExample
 		public String toString() { return String.valueOf(delay); } 
 	}
 	
-	ArrayBlockingQueue<Integer> aBQ;
-	DelayQueue<WorkItem> dQ;
-	LinkedBlockingQueue<Integer> lQ;
-	PriorityBlockingQueue<Integer> pBQ;
-	SynchronousQueue<Integer> sQ;
+	PriorityQueue<Integer> pQ; // implements Queue
+	
+	ArrayBlockingQueue<Integer> aBQ; // implements BlockingQueue implements Queue 
+	DelayQueue<WorkItem> dQ; // implements BlockingQueue implements Queue 
+	LinkedBlockingQueue<Integer> lQ; // implements BlockingQueue implements Queue 
+	PriorityBlockingQueue<Integer> pBQ; // implements BlockingQueue implements Queue 
+	SynchronousQueue<Integer> sQ; // implements BlockingQueue implements Queue 
+	
+	// implements BlockingQueue implements Queue
+	// implements Deque
 	LinkedBlockingDeque<Integer> lBQ;
+	
+	// implements TransferQueue implements BlockingQueue implements Queue
 	LinkedTransferQueue<Integer> lTQ;
 	
-	PriorityQueue<Integer> pQ;
+	ArrayDeque<Integer> aD; // implements Deque
+	LinkedList<Integer> linkedList; // implements Deque
 	
 	public void arrayBlockingQueue() throws InterruptedException
 	{
 		System.out.println("--ArrayBlockingQueue--");
 		aBQ = new ArrayBlockingQueue<>(5);
+		// inserts at tail, waiting if necessary for space
 		aBQ.put(1);
 		aBQ.put(2);
 		aBQ.put(3);
@@ -77,6 +91,7 @@ public class BlockingQueueExample
 		
 		System.out.println(aBQ);
 		
+		// retrieve and remove, wait if necessary
 		aBQ.take();
 		
 		Integer i = aBQ.poll();
