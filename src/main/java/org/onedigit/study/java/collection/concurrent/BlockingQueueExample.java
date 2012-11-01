@@ -62,15 +62,30 @@ public class BlockingQueueExample
 	SynchronousQueue<Integer> sQ; // implements BlockingQueue implements Queue 
 	
 	// The only implementation of BlockingDeque
-	// implements BlockingQueue implements Queue
-	// implements Deque
+	// implements BlockingDeque implements BlockingQueue implements Queue
+	//							implements Deque
 	LinkedBlockingDeque<Integer> lBQ;
 	
 	// implements TransferQueue implements BlockingQueue implements Queue
 	LinkedTransferQueue<Integer> lTQ;
 	
-	ArrayDeque<Integer> aD; // implements Deque
+	ArrayDeque<Integer> aDQ; // implements Deque
 	LinkedList<Integer> linkedList; // implements Deque
+	
+	public void arrayDeque()
+	{
+		aDQ = new ArrayDeque<>();
+		int head = 25;
+		head = (head - 1) & (20 - 1);
+		System.out.println(head);
+		
+		aDQ.add(10);
+		aDQ.offer(20);
+		aDQ.addFirst(50);
+		aDQ.addFirst(40);
+		aDQ.addFirst(30);
+		System.out.println(aDQ);
+	}
 	
 	public void arrayBlockingQueue() throws InterruptedException
 	{
@@ -159,7 +174,8 @@ public class BlockingQueueExample
 	public static void main(String... args) throws InterruptedException
 	{
 		BlockingQueueExample example = new BlockingQueueExample();
-		example.arrayBlockingQueue();
+		// example.arrayBlockingQueue();
 		// example.delayQueue();
+		example.arrayDeque();
 	}
 }
