@@ -61,6 +61,7 @@ public class BlockingQueueExample
 	PriorityBlockingQueue<Integer> pBQ; // implements BlockingQueue implements Queue 
 	SynchronousQueue<Integer> sQ; // implements BlockingQueue implements Queue 
 	
+	// The only implementation of BlockingDeque
 	// implements BlockingQueue implements Queue
 	// implements Deque
 	LinkedBlockingDeque<Integer> lBQ;
