@@ -46,7 +46,7 @@ public class ParseFile
             BufferedReader br = new BufferedReader(new FileReader(new File("numbers.txt")));
             String line = null;
             while ( (line = br.readLine()) != null && line != "") {
-                String[] tokens = line.split(" ");
+                String[] tokens = line.split("\\s+"); // separated by space
                 set.add((mean(toArray(tokens))));
             }
         } catch (Exception e) {

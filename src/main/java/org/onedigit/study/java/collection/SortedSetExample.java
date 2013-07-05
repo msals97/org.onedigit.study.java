@@ -22,8 +22,9 @@ public class SortedSetExample
         set.add(2);
         
         for (Integer s : set) {
-            System.out.println(s);
+            System.out.print(s + " ");
         }
+        System.out.println();
         
         System.out.println(set.first()); // 2
         System.out.println(set.last()); // 40
@@ -85,10 +86,10 @@ public class SortedSetExample
         
     public SortedSetExample()
     {
-        // testInterface();
+        testInterface();
         // testTasks();
-        // testSubset();
-        testPriorityTasks();
+        testSubset();
+        // testPriorityTasks();
     }
     
     public static void main(String... args)

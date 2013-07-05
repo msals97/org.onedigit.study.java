@@ -1,5 +1,8 @@
 package org.onedigit.study.java.concurrent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class UniqueThreadIdGenerator
@@ -14,21 +17,38 @@ class UniqueThreadIdGenerator
 		}
 	};
 
-	public static int getCurrentThreadId()
+	public static int get()
 	{
 		return uniqueNum.get();
 	}
 } 
 
+class LocalDateFormatter extends ThreadLocal<SimpleDateFormat>
+{
+    @Override
+    protected SimpleDateFormat initialValue()
+    {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+}
+
 public class ThreadLocalTest
 {
 	public static void main(String... args)
 	{
-		int id = UniqueThreadIdGenerator.getCurrentThreadId();
+		int id = UniqueThreadIdGenerator.get();
 		System.out.println("Id = " + id);
-		id = UniqueThreadIdGenerator.getCurrentThreadId();
+		id = UniqueThreadIdGenerator.get();
 		System.out.println("Id = " + id);
+
+		Date now = new Date();
+		System.out.println(new LocalDateFormatter().get().format(now));
 		
-		
+		try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 	}
 }

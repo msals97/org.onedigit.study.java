@@ -15,6 +15,7 @@ public class CollectionTest
         a = list.toArray(a);
         System.out.println(Arrays.toString(a));
         classInfo(a);
+        classInfo(list);
     }
     
     public <T> void classInfo(T t)

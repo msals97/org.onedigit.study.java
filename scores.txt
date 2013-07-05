@@ -1,0 +1,9 @@
+# Each row is a treatment
+# Each column is a replication of the treatment
+# The numbers are the measurements
+A B C
+15 20 18
+30 31 35
+45 18 23
+55 30 40
+

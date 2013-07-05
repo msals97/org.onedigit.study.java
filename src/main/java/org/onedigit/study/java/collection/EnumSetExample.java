@@ -1,5 +1,6 @@
 package org.onedigit.study.java.collection;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 
 public class EnumSetExample
