@@ -1,0 +1,212 @@
+;Units Database for Covert 3.0
+;Most units with some "confusing" ones removed
+
+length;Angstroms;10000000000
+length;Astronomical Units;.00000000000668878
+length;Centimeters;100
+length;Chains (Gunter's);.049709695
+length;Cubits;2.1872266
+length;Ells;8.7489
+length;Fathoms;.54680665
+length;Feet;3.2808399
+length;Furlongs;.0049709695
+length;Hands;9.84251975
+length;Inches;39.370079
+length;Kilometers;.001
+length;Leagues (naut Brit);.00017987
+length;Leagues (statute);.00020712
+length;Light year;.0000000000000001057021
+length;Links (Gunter's);4.9709695
+length;Links (Ramden's);3.2808399
+length;Meters;1
+length;Microns;1000000
+length;Miles (naut.Brit.);.00053961182
+length;Miles (statute);.00062137119
+length;Millimeters;1000
+length;Millimicrons;1000000000
+length;Mils;39370.079
+length;Parsecs;.000000000000000032407347
+length;Picas;237.1063353
+length;Points;2845.2756378
+length;Rods;.19883878
+length;Yards;1.0936133
+
+;This is really sort of a mix of mass and weight
+mass;Centals;.02204623
+mass;Grains;15432.358
+mass;Grams;1000
+mass;Hundredweights (long);.019684131
+mass;Hundredweights (short);.022046226
+mass;Kilograms;1
+mass;Ounces (troy/apoth);32.150737
+mass;Ounces (avvp);35.273962
+mass;Pennyweights;643.01493
+;these are "Normal" pounds
+mass;Pounds;2.2046226
+mass;Quarters;.078736522
+mass;Scruples (apoth);771.61792
+mass;Slugs;70.94
+mass;Stones (Brit legal);.15747307
+mass;Tons (short);.0011023113
+mass;Tons (long);.00098420653
+mass;Tons (metric);.001
+
+volume;Barrels (Brit);.00611043
+volume;Barrels (petroleum);.00628999
+volume;Barrels (US dry);.00864849
+volume;Barrels (US liq);.00838665
+volume;Barrels (wine);.00838665
+volume;Bushels (Brit);.02749694
+volume;Bushels (US);.02837839
+volume;Cords;.00027590
+volume;Cu. centimeters;1000
+volume;Cu. feet;.03531566
+volume;Cu. inches;61.02545
+volume;Cu. meters;.001
+volume;Cu. yards;.001307987
+volume;Drams (US fluid);270.5198
+volume;Firkins (Brit);.02444173
+volume;Firkins (US);.02935327
+volume;Gallons (Brit);.2199755
+volume;Gallons (US dry);.2270271
+volume;Gallons (US liq);.2641794
+volume;Gills (Brit);7.039217
+volume;Gills (US);8.453742
+volume;Hectoliters;.01
+volume;Hogsheads;.004193325
+volume;Lasts (Brit);.00034371
+volume;Liters;1
+volume;Minims (US);16231.19
+volume;Ounces (Brit fluid);35.19609
+volume;Ounces (US fluid);33.81497
+volume;Pecks (Brit);.1099878
+volume;Pecks (US);.1135136
+volume;Perches (masonry);.00142690
+volume;Pints (Brit);1.759804
+volume;Pints (US liq);2.113436
+volume;Quarts (Brit);.8799021
+volume;Quarts (US liq);1.056718
+
+area;Sq. meters;1
+area;Acres;.00024710538
+area;Ares;.01
+area;Hectares;.0001
+area;Roods;.009884
+area;Sq. cm;10000
+area;Sq. feet;10.763910
+area;Sq. inches;1550.0031
+area;Sq. kilometers;.000001
+area;Sq. links (Gunter's);24.710538
+area;Sq. miles;.00000038610216
+area;Sq. mm;1000000
+area;Sq. rods;.039536861
+area;Sq. yards;1.19599
+force;Dynes;100000
+force;Grams Force;102
+force;Newtons;1
+force;Poundals;7.015
+force;Pounds Force;.2180
+
+angle;Circumferences;.15915494
+angle;Degrees;57.295779
+angle;Minutes;3437.7468
+angle;Quadrants;.63661977
+angle;Radians;1
+angle;Revolutions;.15915494
+angle;Seconds;206264.81
+power;BTU/hr;3414.43
+power;BTU/sec;.94845278
+power;BTU/min;56.90716667
+power;Cal gm. (mean)/hr;859184
+power;Cal gm. (mean)/min;14319.7
+power;Cal gm. (mean)/sec;238.662
+power;Cal kg. (mean)/hr;859.184
+power;Cal kg. (mean)/min;14.3197
+power;Cal kg. (mean)/sec;.238662
+power;Cu. ft-atm/hr;1254.7
+power;Ergs/sec;10000000000
+power;Foot-poundals/min;1423820
+power;Foot-pounds/hr;2655220
+power;Foot-pounds/min;44253.7
+power;Foot-pounds/sec;737.562
+power;Gram-cm/sec;10197160
+power;Horsepower;1.34102
+power;Horsepower (boiler);.101942
+power;Horsepower (electric);1.34048
+power;Horsepower (metric);1.35962
+power;Joules/hr;3600000
+power;Joules/sec;1000
+power;Kg-meters/hr;367098
+power;Kilowatts;1
+power;Watts;1000
+pressure;Atmospheres;.0680460
+pressure;Bars;.0689476
+pressure;Cm of Hg (0 C);5.17149
+pressure;Cm of Water (4 C);70.3089
+pressure;Dynes/sq cm;68947.6
+pressure;Grams/sq cm;70.306958
+pressure;In of Hg (32 F);2.03602
+pressure;In of Water (39.2 F);27.6807
+pressure;Kg/sq cm;.070306958
+pressure;mm of Hg (0 C);51.7149
+pressure;PSI;1
+energy;BTU;.000948451
+energy;Cal gm.;.239006
+energy;Cal kg. (mean);.000238662
+energy;Cu. ft-atm;.000348529
+energy;Ergs;10000000
+energy;Foot-poundals;23.730360
+energy;Foot-pounds;.737562
+energy;Gram-cm;10197.16
+energy;Hp.-hours;.000000372506
+energy;Joules;1
+energy;Kg.-meters;.1019716
+energy;Kw.-hours;.00000027777
+energy;Liter-atm;.00986895
+energy;Volt-coulambs;.999835
+energy;Watt-hours;.0002777777
+energy;Watt-sec;1
+illumination;Foot-candles;.09290304
+illumination;Lumens/sq cm;.0001
+illumination;Lumens/sq ft;.09290304
+illumination;Lumens/sq meter;1
+illumination;Lux;1
+illumination;Phots;.0001
+luminous flux;Candle power (spher.);.079577472
+luminous flux;Lumens;1
+luminance;Candles/sq cm;1
+luminance;Candles/sq in;6.4516
+luminance;Candles/sq meter;10000
+luminance;Foot-lamberts;2918.6351
+luminance;Lamberts;3.1415927
+speed;Cm./sec;51.4444
+speed;Feet/hr;6076.1155
+speed;Feet/min;101.26859
+speed;Feet/sec;1.6878099
+speed;Furlongs/fortnight;3093.294909
+speed;Kilometers/hr;1.852
+speed;Knots (Int);1
+speed;Meters/hr;1852
+speed;Meters/min;30.8666
+speed;Meters/sec;.514444
+speed;Miles (naut Int)/hr;1
+speed;Miles (statute)/hr;1.1507794
+
+time;Days (mean solar);7
+time;Hours (mean solar);168
+time;Minutes (mean solar);10080
+time;Months (lunar);.23704235
+time;Months (mean calendar);.23013699
+time;Seconds (mean solar);604800
+time;Weeks (mean calendar);1
+time;Years (calendar);.019178082
+
+angular velocity;Degrees/sec;57.295779
+angular velocity;Radians/sec;1
+angular velocity;Revolutions/min;9.5492966
+angular velocity;Revolutions/sec;.15915494
+
+temperature;Farenheit;1.8;-32
+temperature;Kelvin;1;-273.15
+temperature;Rankine;1.8;-491.67
+temperature;Celsius (Centigrade);1;0

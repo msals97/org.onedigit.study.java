@@ -7,32 +7,6 @@ public class BoundedBuffer<V>
     private int head;
     private int count;
     
-    public static void main(String[] args) 
-    {
-        final BoundedBuffer<Integer> buf = new BoundedBuffer<>(5);
-        
-        Thread t = new Thread() {
-            public void run() 
-            {
-                try {
-                    Thread.sleep(2000);
-                    buf.put(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        t.start();
-        
-        try {
-            System.out.println("Going to take an item...");
-            int item = buf.take();
-            System.out.println("Got the item: " + item);                        
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    
     @SuppressWarnings("unchecked")
     public BoundedBuffer(int capacity)
     {
@@ -88,4 +62,29 @@ public class BoundedBuffer<V>
         return count == 0;
     }
 
+    public static void main(String[] args) 
+    {
+        final BoundedBuffer<Integer> buf = new BoundedBuffer<>(5);
+        
+        Thread t = new Thread() {
+            public void run() 
+            {
+                try {
+                    Thread.sleep(2000);
+                    buf.put(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t.start();
+        
+        try {
+            System.out.println("Going to take an item...");
+            int item = buf.take();
+            System.out.println("Got the item: " + item);                        
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

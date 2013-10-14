@@ -14,7 +14,7 @@ public class LatchTest
         public void run()
         {
             try {
-                System.out.println("Waiting at start gate");
+                System.out.println("Waiting at start gate: startGate count = " + startGate.getCount());
                 startGate.await();
                 System.out.println("Starting run");
                 Thread.sleep(3000);
@@ -56,6 +56,7 @@ public class LatchTest
     public static void main(String[] args)
     {
         LatchTest test = new LatchTest();
+        test.process();
         test.process();
     }
 }

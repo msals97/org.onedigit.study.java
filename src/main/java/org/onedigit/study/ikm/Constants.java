@@ -2,6 +2,7 @@ package org.onedigit.study.ikm;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Constants
 {
@@ -45,5 +46,7 @@ class Constants
         
         b2.write(c1, 0, c2.length);
         System.out.println("Out 2: " + b2.size());
+        byte[] bytes = b2.toByteArray();
+        System.out.println(Arrays.toString(bytes));
     }
 }

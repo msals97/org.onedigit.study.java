@@ -18,6 +18,7 @@ public class MemoryMapTest
         CRC32 crc = new CRC32();
         try (FileInputStream fis = new FileInputStream(fileName); FileChannel fc = fis.getChannel()) {
             long len = fc.size();
+            System.out.println("len = " + len + " bytes");
             MappedByteBuffer buffer = fc.map(FileChannel.MapMode.READ_ONLY, 0, len);
             for (int p = 0; p < (int)len; p++) {
                 int c = buffer.get(p);

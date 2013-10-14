@@ -68,11 +68,13 @@ public class PositionManager
     
     public static void main(String... args)
     {
-        // new PositionManager().init().moveRight(-3).moveUp(9).print();
+        new PositionManager().init().moveRight(-3).moveUp(9).print();
         
+        /*
         byte arr[] = new byte[] {2, 3, 4, 5};
         for (final int i : getCharArray(arr)) {
             System.out.println(i + " ");
         }
+        */
     }
 }

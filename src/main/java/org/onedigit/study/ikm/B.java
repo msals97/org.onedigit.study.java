@@ -51,6 +51,8 @@ public class B
             System.out.print(i + " ");
         while (j++ < 1);
         
+        System.out.println();
+        
         Object o = null;
         if (o instanceof Object) {
             System.out.println("instance of object");

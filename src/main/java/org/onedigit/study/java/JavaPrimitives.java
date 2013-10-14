@@ -2,6 +2,7 @@ package org.onedigit.study.java;
 
 public class JavaPrimitives
 {
+    
 	public static void main(String... args)
 	{
 		byte byteMin = -128;
@@ -34,5 +35,17 @@ public class JavaPrimitives
 		long l2 = 0b01111111_11111111_11111111_11111111_11111111_11111111_11111111_11111111L;
 		System.out.println(l1);
 		System.out.println(l2);
+		
+		int aNumber = 3;
+        if (aNumber >= 0)
+            if (aNumber == 0)
+                System.out.println("first string");
+            else
+                System.out.println("second string");
+        System.out.println("third string");
+        
+        int i = 10;
+        int n = ++i%5;
+        System.out.println("i = " + i + ", n = " + n);
 	}
 }

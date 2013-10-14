@@ -39,8 +39,14 @@ public class MergeSort<T extends Comparable<T>>
         int i = 0;
         int j = 0;
         for (int k = p; k <= r; k++) {
-            if (i < L.length && j < R.length) { 
-                if (L[i].compareTo(R[j]) <= 0) {
+            if (i < L.length || j < R.length) {
+                if (i == L.length) { // L[] exhausted
+                    A[k] = R[j];
+                    j++;
+                } else if (j == R.length) { // R[] exhaused
+                    A[k] = L[i];
+                    i++;
+                } else if (L[i].compareTo(R[j]) <= 0) {
                     A[k] = L[i];
                     i++;
                 } else {
@@ -86,12 +92,17 @@ public class MergeSort<T extends Comparable<T>>
 
     public static void main(String... args)
     {
-        Integer[] A = {5, 2, 4, 7, 1, 3, 2, 6};
+        // Integer[] A = {5, 2, 4, 7, 1, 3, 2, 6};
+        Integer[] A = {2, 1, 3, 4};
         MergeSort<Integer> sorter = new MergeSort<>();
         sorter.sort(A, 0, A.length - 1);
         System.out.println(Arrays.toString(A));
         
         // sorter.main(10);
+        
+        // Example, merge two sorted halves.
+        Integer[] b = {1, 4, 5, 6, 7, 8};
+        sorter.merge(b, 0, 2, 5);
     }
     
 }
