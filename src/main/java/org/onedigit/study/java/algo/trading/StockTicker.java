@@ -24,6 +24,9 @@ public class StockTicker implements Runnable
     private final double sigma;
     private final double[] prices;
     private List<StockListener> stockListeners;
+
+    private int currentMinYscale;
+    private int currentMaxYscale;
     
     /**
      *  how frequently to send prices, in milliseconds
@@ -44,12 +47,16 @@ public class StockTicker implements Runnable
         prices = new double[N];
         
         stockListeners = new CopyOnWriteArrayList<>();
+        
+        currentMinYscale = (int)s0 - 5;
+        currentMaxYscale = currentMinYscale + 60;
     }
 
     public void run()
     {
         try {
             generateStockPrices(s0, mu, sigma);
+            /*
             for (int i = 0; i <= T; i++) {
                 int time = i == 0 ? 0 : (int)(i / dt) - 1;
                 
@@ -61,6 +68,7 @@ public class StockTicker implements Runnable
                     Thread.sleep(priceFrequency);
                 }
             }
+            */
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -116,16 +124,23 @@ public class StockTicker implements Runnable
     public void generateStockPrices(double s0, double mean, double sigma)
             
     {
+        prepareRealtimeDraw();
         prices[0] = s0;
         for (int i = 1; i < N; i++) {
             double s = s0 * geometricBrownian(mean, sigma, dt);
             prices[i] = s;
+            
+            // TODO
+            drawRealtime(i);
+            int time = i == 0 ? 0 : (int)(i / dt) - 1;
+            publish(i, time, s);
+            
             // System.out.println(i + "," + s);
             s0 = s;
         }
         // writePrices();
         if (priceFrequency > 0) {
-            drawPrices();
+            // drawPrices();
         }
     }
     
@@ -191,6 +206,53 @@ public class StockTicker implements Runnable
         StdDraw.show(0);
     }
     
+    public void prepareRealtimeDraw()
+    {
+        StdDraw.setCanvasSize(1680, 512);
+        StdDraw.setXscale(0, N);
+        StdDraw.setYscale(currentMinYscale, currentMaxYscale);
+        StdDraw.show(0);
+        StdDraw.setPenRadius(0.001);
+        
+        // Draw x-grid
+        int dx = 20;
+        for (int j = currentMinYscale; j < currentMaxYscale; ) {
+            for (int i = 1; i < N; ) {
+                StdDraw.line(i, j, i + dx, j);
+                i += dx;
+            }
+            j += 2;
+        }
+        
+        // Draw y-grid
+        for (int i = 0; i <= N; i++) {
+            for (int j = currentMinYscale; j < currentMaxYscale; ) {
+                StdDraw.line(i, j, i, j + 2);
+                j += 2;
+            }
+            i += 99;
+        }        
+    }
+    
+    public void drawRealtime(int time)
+    {
+        double min = (prices[time - 1] > prices[time]) ? prices[time] : prices[time - 1];
+        double max = (prices[time - 1] > prices[time]) ? prices[time - 1] : prices[time];
+        if (min < currentMinYscale) {
+            StdDraw.setYscale(min, currentMaxYscale);
+            currentMinYscale = (int)min;
+        }
+        if (max > currentMaxYscale) {
+            StdDraw.setYscale(currentMinYscale, max);
+            currentMaxYscale = (int)max;
+        }
+        StdDraw.show(0);
+        
+        // System.out.println("min = " + min + ", max = " + max);
+        StdDraw.line(time - 1, prices[time - 1], time, prices[time]);
+        StdDraw.show(0);        
+    }
+    
     public void testGaussian(double mean, double stddev)
     {
         double[] normals = new double[N];
@@ -226,8 +288,8 @@ public class StockTicker implements Runnable
     
     public static void main(String[] args)
     {
-        StockTicker st = new StockTicker(600_000, 0.01, 20, 0.01, 0.01);
-        st.setPriceFrequence(-1);
+        StockTicker st = new StockTicker(90, 0.01, 20, 0.01, 0.01);
+        // st.setPriceFrequence(-1);
         Thread t = new Thread(st);
         Clock clock = new Clock();
         t.start();
